@@ -10,7 +10,6 @@ interface User {
     id: string;
     name: string;
     email: string;
-    address: string | null
   };
   accessToken: string;
 }
@@ -40,7 +39,6 @@ export class RegisterUserUseCase implements IRegisterUserUseCase {
         id: user.id,
         name: user.name,
         email: user.email,
-        address: user.address || null,
       },
       accessToken,
     };

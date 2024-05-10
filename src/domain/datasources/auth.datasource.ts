@@ -10,4 +10,8 @@ export abstract class AuthDatasource {
   abstract login(
     loginUserDto: LoginUserDto
   ): Promise<UserEntity>;
+
+  abstract verifyAccessToken(
+    accessToken: string
+  ): Promise<UserEntity>;
 }

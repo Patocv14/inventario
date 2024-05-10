@@ -10,4 +10,10 @@ export abstract class AuthRepository {
   abstract login(
     loginUserDto: LoginUserDto
   ): Promise<UserEntity>;
+  
+  abstract verifyAccessToken(
+    accessToken: string
+  ): Promise<UserEntity>;
+
+  
 }
