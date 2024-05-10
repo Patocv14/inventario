@@ -8,7 +8,6 @@ export abstract class AuthDatasource {
   ): Promise<UserEntity>;
 
   abstract login(
-    loginUserDto: LoginUserDto,
-    accessToken: string
+    loginUserDto: LoginUserDto
   ): Promise<UserEntity>;
 }
