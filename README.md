@@ -14,7 +14,7 @@
 ```
    npx prisma migrate dev
 ```
-
-5. Ejecutar `npm run dev`
+5. Ejecutar `npx prisma db seed` Esto creara el user de admin `email: admin@admin.com, password: admin`
+6. Ejecutar `npm run dev`
 
 Si hay cambios en el schema.prisma ejectuar `npx prisma generate` y luego `npx prisma migrate dev`
