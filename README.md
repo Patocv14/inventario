@@ -1,7 +1,20 @@
 # Proyecto
-Para ejectuar este proyecto se debe correr el siguiente codigo en la terminal
+
+## Pasos para ejectuar el programa
+
+1. Clonar el archivo .env.template a .env
+2. Configurar las variables de entorno
+3. Ejecutar el comando `npm install`
+4. Levantar las bases de datos con el comando
+   ```
+   docker compose up -d
+   ```
+5. Ejecturar el comando
+
 ```
-npm i
-npx prisma migrate dev
-npm run dev
+   npx prisma migrate dev
 ```
+
+5. Ejecutar `npm run dev`
+
+Si hay cambios en el schema.prisma ejectuar `npx prisma generate` y luego `npx prisma migrate dev`
