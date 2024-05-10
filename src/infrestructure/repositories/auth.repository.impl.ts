@@ -19,4 +19,7 @@ export class AuthRepositoryImpl implements AuthRepository {
   deleteUser(userId: string): Promise<void> {
     return this.authDatasource.deleteUser(userId);
   }
+  updateUser(userId: string, updateUserDto: RegisterUserDto): Promise<UserEntity> {
+    return this.authDatasource.updateUser(userId, updateUserDto);
+  }
 }

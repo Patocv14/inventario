@@ -1,4 +1,4 @@
-import { LoginUserDto, RegisterUserDto } from "../dto";
+import { LoginUserDto, RegisterUserDto, UpdateUserDto } from "../dto";
 import { UserEntity } from "../entities";
 
 export abstract class AuthRepository {
@@ -18,6 +18,11 @@ export abstract class AuthRepository {
   abstract deleteUser(
     userId: string
   ): Promise<void>;
+
+  abstract updateUser(
+    userId: string,
+    updateUserDto: UpdateUserDto
+  ): Promise<UserEntity>;
 
   
 }

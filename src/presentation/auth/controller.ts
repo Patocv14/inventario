@@ -6,6 +6,8 @@ import {
   LoginUserUseCase,
   RegisterUserDto,
   RegisterUserUseCase,
+  UpdateUserDto,
+  UpdateUserUseCase,
   VerifyTokenUseCase,
 } from "../../domain";
 
@@ -66,6 +68,17 @@ export class AuthController {
 
     this.authRepository
       .deleteUser(userId)
+      .then((data) => res.json(data))
+      .catch((error) => this.handleError(error, res));
+  };
+
+  updateUser = (req: Request, res: Response) => {
+    const { userId } = req.params;
+    const [error, updateUserDto] = UpdateUserDto.update(req.body);
+    if (error) return this.handleError(error, res);
+
+    new UpdateUserUseCase(this.authRepository)
+      .execute(userId, updateUserDto!)
       .then((data) => res.json(data))
       .catch((error) => this.handleError(error, res));
   };

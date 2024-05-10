@@ -7,6 +7,7 @@ import {
   UserEntity,
   CustomErrors,
   LoginUserDto,
+  UpdateUserDto,
 } from "../../domain";
 import { UserMapper } from "../mappers";
 
@@ -99,6 +100,23 @@ export class AuthDatasouceImpl implements AuthDatasource {
       await this.prisma.user.delete({ where: { id: userId } });
 
       return Promise.resolve();
+    } catch (error) {
+      return InternalError(error);
+    }
+  }
+
+  async updateUser(userId: string, updateUserDto: UpdateUserDto): Promise<UserEntity> {
+    try {
+      const user = await this.prisma.user.findUnique({ where: { id: userId } });
+      if (!user) throw CustomErrors.unauthorized("User not found");
+
+      const updatedUser = await this.prisma.user.update({
+        where: { id: userId },
+        data: updateUserDto,
+      });
+
+      return UserMapper.userEntityFromObject(updatedUser);
+      
     } catch (error) {
       return InternalError(error);
     }
