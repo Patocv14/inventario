@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE "Product" ALTER COLUMN "imageUrl" DROP NOT NULL;
+
+-- AlterTable
+ALTER TABLE "User" ALTER COLUMN "address" DROP NOT NULL,
+ALTER COLUMN "token" DROP NOT NULL;
