@@ -14,4 +14,8 @@ export abstract class AuthDatasource {
   abstract verifyAccessToken(
     accessToken: string
   ): Promise<UserEntity>;
+
+  abstract deleteUser(
+    userId: string
+  ): Promise<void>;
 }

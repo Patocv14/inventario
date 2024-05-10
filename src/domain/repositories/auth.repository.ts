@@ -15,5 +15,9 @@ export abstract class AuthRepository {
     accessToken: string
   ): Promise<UserEntity>;
 
+  abstract deleteUser(
+    userId: string
+  ): Promise<void>;
+
   
 }

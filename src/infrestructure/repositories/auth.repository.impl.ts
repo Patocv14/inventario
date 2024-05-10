@@ -16,4 +16,7 @@ export class AuthRepositoryImpl implements AuthRepository {
   verifyAccessToken(accessToken: string): Promise<UserEntity> {
     return this.authDatasource.verifyAccessToken(accessToken);
   }
+  deleteUser(userId: string): Promise<void> {
+    return this.authDatasource.deleteUser(userId);
+  }
 }

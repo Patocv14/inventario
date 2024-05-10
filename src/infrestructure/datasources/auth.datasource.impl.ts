@@ -89,4 +89,18 @@ export class AuthDatasouceImpl implements AuthDatasource {
       return InternalError(error);
     }
   }
+
+  async deleteUser(userId: string): Promise<void> {
+    try {
+      
+      const user = await this.prisma.user.findUnique({ where: { id: userId } });
+      if (!user) throw CustomErrors.unauthorized("User not found");
+
+      await this.prisma.user.delete({ where: { id: userId } });
+
+      return Promise.resolve();
+    } catch (error) {
+      return InternalError(error);
+    }
+  }
 }
