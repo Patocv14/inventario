@@ -121,4 +121,25 @@ export class AuthDatasouceImpl implements AuthDatasource {
       return InternalError(error);
     }
   }
+
+  async getUser(userId: string): Promise<UserEntity> {
+    try {
+      const user = await this.prisma.user.findUnique({ where: { id: userId } });
+      if (!user) throw CustomErrors.unauthorized("User not found");
+
+      return UserMapper.userEntityFromObject(user);
+    } catch (error) {
+      return InternalError(error);
+    }
+  }
+
+  async getUsers(): Promise<UserEntity[]> {
+    try {
+      const users = await this.prisma.user.findMany();
+      return users.map((user) => UserMapper.userEntityFromObject(user));
+    } catch (error) {
+      return InternalError(error);
+    }
+  }
+  
 }

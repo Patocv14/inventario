@@ -22,4 +22,10 @@ export class AuthRepositoryImpl implements AuthRepository {
   updateUser(userId: string, updateUserDto: RegisterUserDto): Promise<UserEntity> {
     return this.authDatasource.updateUser(userId, updateUserDto);
   }
+  getUser(userId: string): Promise<UserEntity> {
+    return this.authDatasource.getUser(userId);
+  }
+  getUsers(): Promise<UserEntity[]> {
+    return this.authDatasource.getUsers();
+  }
 }

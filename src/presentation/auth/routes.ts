@@ -14,6 +14,8 @@ export class AuthRoutes {
     router.post("/register", controller.registerUser);
     router.post('/login', controller.loginUser)
     router.get('/verify-token/:token', controller.verifyAccessToken)
+    router.get('/:userId', controller.getUser)
+    router.get('/', controller.getUsers)
     router.put('/:userId', controller.updateUser)
     router.delete('/:userId', controller.deleteUser)
     return router;

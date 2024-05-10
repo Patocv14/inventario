@@ -24,5 +24,10 @@ export abstract class AuthRepository {
     updateUserDto: UpdateUserDto
   ): Promise<UserEntity>;
 
+  abstract getUser(
+    userId: string
+  ): Promise<UserEntity>;
+
+  abstract getUsers(): Promise<UserEntity[]>;
   
 }

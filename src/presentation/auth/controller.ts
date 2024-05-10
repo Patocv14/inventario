@@ -82,4 +82,26 @@ export class AuthController {
       .then((data) => res.json(data))
       .catch((error) => this.handleError(error, res));
   };
+
+  getUser = (req: Request, res: Response) => {
+    const { userId } = req.params;
+
+    if (!userId)
+      return this.handleError(
+        CustomErrors.badRequest("User id is required"),
+        res
+      );
+
+    this.authRepository
+      .getUser(userId)
+      .then((data) => res.json(data))
+      .catch((error) => this.handleError(error, res));
+  };
+
+  getUsers = (req: Request, res: Response) => {
+    this.authRepository
+      .getUsers()
+      .then((data) => res.json(data))
+      .catch((error) => this.handleError(error, res));
+  };
 }
