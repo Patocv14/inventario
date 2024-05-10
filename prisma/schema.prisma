@@ -19,7 +19,7 @@ model User {
   address     String?
   email       String  @unique
   password    String
-  accessToken String?
+  accessToken String? @unique
   role        Role    @default(USER)
 }
 
