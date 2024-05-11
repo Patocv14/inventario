@@ -15,4 +15,8 @@ export class MakerRepositoryImpl implements MakerRepository {
     return this.makerDatasource.editMaker(makerDto, makerId);
   }
 
+  deleteMaker(makerId: string): Promise<MakerEntity>{
+    return this.makerDatasource.deleteMaker(makerId);
+  }
+
 }

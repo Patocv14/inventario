@@ -15,6 +15,7 @@ export class MakerRoutes {
 
     router.post("/", controller.createMaker);
     router.put("/:id", controller.updateMaker);
+    router.delete("/:id", controller.deleteMaker);
 
     return router;
 

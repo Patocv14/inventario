@@ -4,6 +4,7 @@ import {
   CreateMakerUseCase,
   MakerRepository,
   UpdateMakerUseCase,
+  DeleteMakerUseCase,
 } from "../../domain";
 import { handleError } from "../../config";
 
@@ -29,4 +30,13 @@ export class MakerController {
       .then((data) => res.json(data))
       .catch((error) => handleError(error, res));
   };
+
+  deleteMaker = (req: Request, res: Response) => {
+
+    new DeleteMakerUseCase(this.makerRepository)
+      .execute(req.params.id)
+      .then(() => res.json())
+      .catch((error) => handleError(error, res));
+
+  }
 }

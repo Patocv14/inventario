@@ -19,8 +19,8 @@
 
 # Maker
 
-1. Create Maker
-2. Edit Maker
-3. Delete Maker
+<!-- 1. Create Maker
+2. Edit Maker -->
+<!-- 3. Delete Maker -->
 4. getMakerById
 5. getMakers
