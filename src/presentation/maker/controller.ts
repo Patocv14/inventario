@@ -5,6 +5,8 @@ import {
   MakerRepository,
   UpdateMakerUseCase,
   DeleteMakerUseCase,
+  GetMakerUseCase,
+  GetMakersUseCase,
 } from "../../domain";
 import { handleError } from "../../config";
 
@@ -32,11 +34,23 @@ export class MakerController {
   };
 
   deleteMaker = (req: Request, res: Response) => {
-
     new DeleteMakerUseCase(this.makerRepository)
       .execute(req.params.id)
       .then(() => res.json())
       .catch((error) => handleError(error, res));
+  };
 
-  }
+  getMaker = (req: Request, res: Response) => {
+    new GetMakerUseCase(this.makerRepository)
+      .execute(req.params.id)
+      .then((data) => res.json(data))
+      .catch((error) => handleError(error, res));
+  };
+
+  getMakers = (req: Request, res: Response) => {
+    new GetMakersUseCase(this.makerRepository)
+      .execute()
+      .then((data) => res.json(data))
+      .catch((error) => handleError(error, res));
+  };
 }

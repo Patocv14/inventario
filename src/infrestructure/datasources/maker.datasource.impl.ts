@@ -60,4 +60,24 @@ export class MakerDatasourceImpl implements MakerDatasource {
       return InternalError(error);
     }
   }
+
+  async getMaker(makerId: string): Promise<MakerEntity> {
+    try {
+      const maker = await this.prisma.maker.findUnique({
+        where: { id: makerId },
+      });
+      if (!maker) throw CustomErrors.badRequest("Maker not found");
+      return maker;
+    } catch (error) {
+      return InternalError(error);
+    }
+  }
+
+  async getMakers(): Promise<MakerEntity[]> {
+    try {
+      return await this.prisma.maker.findMany();
+    } catch (error) {
+      return InternalError(error);
+    }
+  }
 }

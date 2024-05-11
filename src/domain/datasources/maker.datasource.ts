@@ -5,4 +5,6 @@ export abstract class MakerDatasource {
   abstract createMaker(makerDto: MakerDto): Promise<MakerEntity>;
   abstract editMaker(makerDto: MakerDto, makerId: string): Promise<MakerEntity>;
   abstract deleteMaker(makerId: string): Promise<MakerEntity>;
+  abstract getMaker(makerId: string): Promise<MakerEntity>;
+  abstract getMakers(): Promise<MakerEntity[]>;
 }
