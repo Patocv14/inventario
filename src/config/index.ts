@@ -4,4 +4,5 @@ export * from './adapters/jwt.adapter'
 export * from './adapters/uuid.adapter'
 
 export * from './helpers/throw-internalError.helper'
+export * from './helpers/handleErrror'
 export * from './helpers/validators.helper'
