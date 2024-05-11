@@ -1,4 +1,6 @@
 import { Router } from "express";
+import { MakerController } from "./controller";
+import { MakerDatasourceImpl, MakerRepositoryImpl } from "../../infrestructure";
 
 
 export class MakerRoutes {
@@ -7,9 +9,12 @@ export class MakerRoutes {
 
     const router = Router();
 
-    router.post("/", (req, res) => {
-      res.json({ message: "creating maker" });
-    });
+    const datasource = new MakerDatasourceImpl();
+    const repository = new MakerRepositoryImpl(datasource);
+    const controller = new MakerController(repository);
+
+    router.post("/", controller.createMaker);
+    router.put("/:id", controller.updateMaker);
 
     return router;
 
