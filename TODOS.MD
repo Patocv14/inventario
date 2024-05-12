@@ -11,11 +11,11 @@
 
 # Category 
 
-1. Create Category
+<!-- 1. Create Category
 2. Edit Category
 3. Delete Category
 4. getCategory
-5. getCategories
+5. getCategories -->
 
 # Maker
 
