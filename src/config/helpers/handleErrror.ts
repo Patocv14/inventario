@@ -6,5 +6,5 @@ export const handleError = (error: unknown, res: Response) => {
     return res.status(error.statusCode).json({ error: error.message });
   }
   console.log("Error: ", error);
-  return res.status(500).json({ error: "Internal Server Error" });
+  return res.status(500).json({ error: error });
 };
