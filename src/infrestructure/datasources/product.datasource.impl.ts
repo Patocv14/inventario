@@ -53,4 +53,15 @@ export class ProductDatasourceImpl implements ProductDatasource {
       return InternalError(error);
     }
   }
+
+  async getProducts(): Promise<ProductEntity[]> {
+    try {
+      const products = await this.prisma.product.findMany();
+      return products.map((product) =>
+        ProductMapper.productEntityFromObject(product)
+      );
+    } catch (error) {
+      return InternalError(error);
+    }
+  }
 }

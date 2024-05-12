@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CreateProductUseCase, ProductDto, ProductRepository } from "../../domain";
+import { CreateProductUseCase, GetProductsUseCase, ProductDto, ProductRepository } from "../../domain";
 import { handleError } from "../../config";
 
 
@@ -16,6 +16,15 @@ export class ProductController {
       .execute(productDto!)
       .then((data) => res.json(data))
       .catch((error) => handleError(error, res));
+  }
+
+  getProducts = (req: Request, res: Response) => {
+
+    new GetProductsUseCase(this.productRepository)
+      .execute()
+      .then((data) => res.json(data))
+      .catch((error) => handleError(error, res));
+
   }
 
 }

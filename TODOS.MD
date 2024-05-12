@@ -2,7 +2,7 @@
 
 # Products
 
-1. Create Product
+<!-- 1. Create Product -->
 2. getAllProducts
 3. getProduct
 4. getProductByCategory

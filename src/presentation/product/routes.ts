@@ -14,6 +14,7 @@ export class ProductRoutes {
     const controller = new ProductController(repository);
 
     router.post('/', controller.createProduct)
+    router.get('/', controller.getProducts)
 
     return router;
   }
