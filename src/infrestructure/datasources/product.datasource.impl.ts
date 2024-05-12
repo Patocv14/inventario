@@ -64,4 +64,21 @@ export class ProductDatasourceImpl implements ProductDatasource {
       return InternalError(error);
     }
   }
+
+  async getProduct(productId: string): Promise<ProductEntity> {
+    if(!productId) throw CustomErrors.badRequest("Product id is required");
+    try {
+      const product = await this.prisma.product.findUnique({
+        where: {
+          id: productId,
+        },
+      });
+
+      if (!product) throw CustomErrors.notFound("Product not found");
+
+      return ProductMapper.productEntityFromObject(product);
+    } catch (error) {
+      return InternalError(error);
+    }
+  }
 }
