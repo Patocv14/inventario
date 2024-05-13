@@ -7,6 +7,8 @@ import { Server } from "./presentation/server";
 
 
 async function main() {
+
+  
   new Server({
     routes: AppRoutes.routes,
   }).start();

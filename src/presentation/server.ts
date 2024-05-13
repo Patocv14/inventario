@@ -1,4 +1,5 @@
 import express, { Router } from "express";
+import cors from 'cors'
 
 interface Options {
   port?: number;
@@ -16,6 +17,22 @@ export class Server {
   }
 
   async start() {
+    const whitelist = [process.env.FRONTEND_URL];
+
+    const corsOptions = {
+      origin: function (origin: any, callback: any) {
+        if (whitelist.includes(origin)) {
+          // Puede consultar la api
+          callback(null, true);
+        } else {
+          // No esta permitido el request
+          callback(new Error("Error de cors"));
+        }
+      },
+    };
+
+    this.app.use(cors(corsOptions));
+
     this.app.use(express.json());
 
     this.app.use(this.routes);
