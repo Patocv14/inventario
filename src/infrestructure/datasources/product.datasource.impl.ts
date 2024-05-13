@@ -66,7 +66,7 @@ export class ProductDatasourceImpl implements ProductDatasource {
   }
 
   async getProduct(productId: string): Promise<ProductEntity> {
-    if(!productId) throw CustomErrors.badRequest("Product id is required");
+    if (!productId) throw CustomErrors.badRequest("Product id is required");
     try {
       const product = await this.prisma.product.findUnique({
         where: {
@@ -77,6 +77,31 @@ export class ProductDatasourceImpl implements ProductDatasource {
       if (!product) throw CustomErrors.notFound("Product not found");
 
       return ProductMapper.productEntityFromObject(product);
+    } catch (error) {
+      return InternalError(error);
+    }
+  }
+  async getProductByCategory(categoryId: string): Promise<ProductEntity[]> {
+    if (!categoryId) throw CustomErrors.badRequest("Category id is required");
+
+    try {
+
+      const categoryExists = await this.prisma.category.findUnique({
+        where: { id: categoryId },
+      })
+      if (!categoryExists) throw CustomErrors.badRequest("Category not found");
+
+      const products = await this.prisma.product.findMany({
+        where: {
+          categoryId: categoryId,
+        },
+      });
+
+      if (!products) throw CustomErrors.notFound("Products not found");
+
+      return products.map((product) =>
+        ProductMapper.productEntityFromObject(product)
+      );
     } catch (error) {
       return InternalError(error);
     }
