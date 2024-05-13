@@ -34,7 +34,7 @@ export class ProductDatasourceImpl implements ProductDatasource {
           price: productDto.price,
           description: productDto.description,
           stock: productDto.stock,
-          imageUrl: productDto.imgUrl,
+          imageUrl: productDto.imageUrl,
           category: {
             connect: {
               id: productDto.categoryId,
@@ -106,4 +106,48 @@ export class ProductDatasourceImpl implements ProductDatasource {
       return InternalError(error);
     }
   }
+
+  async updateProduct(productId: string, product: ProductDto): Promise<ProductEntity> {
+    
+    if (!productId) throw CustomErrors.badRequest("Product id is required");
+    try {
+      const productExists = await this.prisma.product.findUnique({
+        where: {
+          id: productId,
+        },
+      });
+
+      if (!productExists) throw CustomErrors.notFound("Product not found");
+
+      const updatedProduct = await this.prisma.product.update({
+        where: {
+          id: productId,
+        },
+        data: {
+          name: product.name || productExists.name,
+          price: product.price || productExists.price,
+          description: product.description || productExists.description,
+          stock: product.stock || productExists.stock,
+          imageUrl: product.imageUrl || productExists.imageUrl,
+          category: {
+            connect: {
+              id: product.categoryId || productExists.categoryId,
+            },
+          },
+          Maker: {
+            connect: {
+              id: product.makerId || productExists.makerId,
+            },
+          
+          }
+        },
+      });
+
+      return ProductMapper.productEntityFromObject(updatedProduct);
+    } catch (error) {
+      return InternalError(error);
+    }
+
+  }
+
 }

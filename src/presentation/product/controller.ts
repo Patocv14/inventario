@@ -7,6 +7,7 @@ import {
   GetProductsUseCase,
   ProductDto,
   ProductRepository,
+  UpdateProductUseCase,
 } from "../../domain";
 import { handleError } from "../../config";
 
@@ -43,6 +44,13 @@ export class ProductController {
       .execute(req.params.categoryId)
       .then((data) => res.json(data))
       .catch((error) => handleError(error, res));
+  }
 
+  updateProduct = (req: Request, res: Response) => {
+
+    new UpdateProductUseCase(this.productRepository)
+      .execute(req.params.productId, req.body)
+      .then((data) => res.json(data))
+      .catch((error) => handleError(error, res));
   }
 }

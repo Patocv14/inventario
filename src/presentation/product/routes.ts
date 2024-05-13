@@ -17,6 +17,7 @@ export class ProductRoutes {
     router.get('/', controller.getProducts)
     router.get('/:productId', controller.getProduct)
     router.get('/category/:categoryId', controller.getProductByCategory)
+    router.put('/:productId', controller.updateProduct)
 
     return router;
   }

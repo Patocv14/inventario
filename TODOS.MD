@@ -5,8 +5,8 @@
 <!-- 1. Create Product -->
 <!-- 2. getAllProducts -->
 <!-- 3. getProduct -->
-4. getProductByCategory
-5. edit Product
+<!-- 4. getProductByCategory -->
+<!-- 5. edit Product -->
 6. delete Product
 7. addNewStock
 8. substractStock

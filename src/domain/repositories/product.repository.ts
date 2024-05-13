@@ -7,5 +7,6 @@ export abstract class ProductRepository {
   abstract getProducts(): Promise<ProductEntity[]>
   abstract getProduct(productId: string): Promise<ProductEntity>;
   abstract getProductByCategory(categoryId: string): Promise<ProductEntity[]>;
-
+  abstract updateProduct(productId: string, product: ProductDto): Promise<ProductEntity>;
+  
 }

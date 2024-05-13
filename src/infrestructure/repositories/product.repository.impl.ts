@@ -22,4 +22,8 @@ export class ProductRepositoryImpl implements ProductRepository {
     return this.productDatasource.getProductByCategory(categoryId);
   }
 
+  updateProduct(productId: string, product: ProductDto): Promise<ProductEntity> {
+    return this.productDatasource.updateProduct(productId, product);
+  }
+
 }
