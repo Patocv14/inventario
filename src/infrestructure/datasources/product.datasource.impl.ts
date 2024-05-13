@@ -85,10 +85,9 @@ export class ProductDatasourceImpl implements ProductDatasource {
     if (!categoryId) throw CustomErrors.badRequest("Category id is required");
 
     try {
-
       const categoryExists = await this.prisma.category.findUnique({
         where: { id: categoryId },
-      })
+      });
       if (!categoryExists) throw CustomErrors.badRequest("Category not found");
 
       const products = await this.prisma.product.findMany({
@@ -107,8 +106,10 @@ export class ProductDatasourceImpl implements ProductDatasource {
     }
   }
 
-  async updateProduct(productId: string, product: ProductDto): Promise<ProductEntity> {
-    
+  async updateProduct(
+    productId: string,
+    product: ProductDto
+  ): Promise<ProductEntity> {
     if (!productId) throw CustomErrors.badRequest("Product id is required");
     try {
       const productExists = await this.prisma.product.findUnique({
@@ -116,6 +117,9 @@ export class ProductDatasourceImpl implements ProductDatasource {
           id: productId,
         },
       });
+
+      if (productExists?.stock! < product.stock)
+        throw CustomErrors.badRequest("Stock is not enough");
 
       if (!productExists) throw CustomErrors.notFound("Product not found");
 
@@ -138,8 +142,7 @@ export class ProductDatasourceImpl implements ProductDatasource {
             connect: {
               id: product.makerId || productExists.makerId,
             },
-          
-          }
+          },
         },
       });
 
@@ -147,11 +150,9 @@ export class ProductDatasourceImpl implements ProductDatasource {
     } catch (error) {
       return InternalError(error);
     }
-
   }
 
   async deleteProduct(productId: string): Promise<void> {
-    
     if (!productId) throw CustomErrors.badRequest("Product id is required");
     try {
       const productExists = await this.prisma.product.findUnique({
@@ -170,7 +171,5 @@ export class ProductDatasourceImpl implements ProductDatasource {
     } catch (error) {
       return InternalError(error);
     }
-
   }
-
 }
