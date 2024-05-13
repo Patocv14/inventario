@@ -26,4 +26,8 @@ export class ProductRepositoryImpl implements ProductRepository {
     return this.productDatasource.updateProduct(productId, product);
   }
 
+  deleteProduct(productId: string): Promise<void> {
+    return this.productDatasource.deleteProduct(productId);
+  }
+
 }

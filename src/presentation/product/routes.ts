@@ -18,6 +18,7 @@ export class ProductRoutes {
     router.get('/:productId', controller.getProduct)
     router.get('/category/:categoryId', controller.getProductByCategory)
     router.put('/:productId', controller.updateProduct)
+    router.delete('/:productId', controller.deleteProduct)
 
     return router;
   }

@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import {
   CreateProductUseCase,
+  DeleteProductUseCase,
   GetCategoriesUseCase,
   GetProductByCategoryUseCase,
   GetProductUseCase,
@@ -36,21 +37,25 @@ export class ProductController {
       .execute(req.params.productId)
       .then((data) => res.json(data))
       .catch((error) => handleError(error, res));
-  }
+  };
 
   getProductByCategory = (req: Request, res: Response) => {
-   
     new GetProductByCategoryUseCase(this.productRepository)
       .execute(req.params.categoryId)
       .then((data) => res.json(data))
       .catch((error) => handleError(error, res));
-  }
+  };
 
   updateProduct = (req: Request, res: Response) => {
-
     new UpdateProductUseCase(this.productRepository)
       .execute(req.params.productId, req.body)
       .then((data) => res.json(data))
       .catch((error) => handleError(error, res));
-  }
+  };
+
+  deleteProduct = (req: Request, res: Response) =>
+    new DeleteProductUseCase(this.productRepository)
+      .execute(req.params.productId)
+      .then(() => res.json())
+      .catch((error) => handleError(error, res));
 }

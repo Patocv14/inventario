@@ -150,4 +150,27 @@ export class ProductDatasourceImpl implements ProductDatasource {
 
   }
 
+  async deleteProduct(productId: string): Promise<void> {
+    
+    if (!productId) throw CustomErrors.badRequest("Product id is required");
+    try {
+      const productExists = await this.prisma.product.findUnique({
+        where: {
+          id: productId,
+        },
+      });
+
+      if (!productExists) throw CustomErrors.notFound("Product not found");
+
+      await this.prisma.product.delete({
+        where: {
+          id: productId,
+        },
+      });
+    } catch (error) {
+      return InternalError(error);
+    }
+
+  }
+
 }
