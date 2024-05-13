@@ -25,7 +25,9 @@ const isAdmin = async (req: Request, res: Response, next: NextFunction) => {
       })
       if(!user) throw CustomErrors.notFound("User not found")
       if(user.role !== "ADMIN") {
-        throw CustomErrors.forbidden("You don't have permission to access this resource")
+        return res.status(401).json({
+          message: "Unauthorized"
+        })
       }
 
       return next()
