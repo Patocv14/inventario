@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { ProductDatasourceImpl, ProductRepositoryImpl } from "../../infrestructure";
 import { ProductController } from "./controller";
+import isAdmin from "../../middlewares/isAdmin.middleware";
 
 
 export class ProductRoutes {
@@ -13,12 +14,12 @@ export class ProductRoutes {
     const repository = new ProductRepositoryImpl(datasource);
     const controller = new ProductController(repository);
 
-    router.post('/', controller.createProduct)
-    router.get('/', controller.getProducts)
+    router.post('/', isAdmin ,controller.createProduct)
+    router.get('/' ,controller.getProducts)
     router.get('/:productId', controller.getProduct)
     router.get('/category/:categoryId', controller.getProductByCategory)
-    router.put('/:productId', controller.updateProduct)
-    router.delete('/:productId', controller.deleteProduct)
+    router.put('/:productId', isAdmin ,controller.updateProduct)
+    router.delete('/:productId', isAdmin ,controller.deleteProduct)
 
     return router;
   }

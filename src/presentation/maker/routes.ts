@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { MakerController } from "./controller";
 import { MakerDatasourceImpl, MakerRepositoryImpl } from "../../infrestructure";
+import isAdmin from "../../middlewares/isAdmin.middleware";
 
 
 export class MakerRoutes {
@@ -13,9 +14,9 @@ export class MakerRoutes {
     const repository = new MakerRepositoryImpl(datasource);
     const controller = new MakerController(repository);
 
-    router.post("/", controller.createMaker);
-    router.put("/:id", controller.updateMaker);
-    router.delete("/:id", controller.deleteMaker);
+    router.post("/", isAdmin ,controller.createMaker);
+    router.put("/:id", isAdmin ,controller.updateMaker);
+    router.delete("/:id", isAdmin ,controller.deleteMaker);
     router.get("/:id", controller.getMaker);
     router.get("/", controller.getMakers);
 

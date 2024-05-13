@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { CategoryController } from "./controller";
 import { CategoryDatasourceImpl, CategoryRepositoryImpl } from "../../infrestructure";
+import isAdmin from "../../middlewares/isAdmin.middleware";
 
 
 export class CategoryRoutes {
@@ -13,9 +14,9 @@ export class CategoryRoutes {
     const repository = new CategoryRepositoryImpl(datasource);
     const controller = new CategoryController(repository);
 
-    router.post("/", controller.createCategory);
-    router.put("/:id", controller.updateCategory);
-    router.delete("/:id", controller.deleteCategory);
+    router.post("/", isAdmin ,controller.createCategory);
+    router.put("/:id", isAdmin ,controller.updateCategory);
+    router.delete("/:id", isAdmin ,controller.deleteCategory);
     router.get("/:id", controller.getCategory);
     router.get("/", controller.getCategories);
 

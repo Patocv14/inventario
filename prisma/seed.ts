@@ -1,14 +1,15 @@
 import { PrismaClient } from "@prisma/client";
+import { JwtAdapter } from "../src/config";
 const prisma = new PrismaClient();
 
 async function main() {
   const admin = await prisma.user.create({
     data: {
-      id: '123-454234-3',
       name: "admin",
       email: "admin@admin.com",
       password: "$2a$10$ih7fbEbrU.3qmntBF.jqietRjHdFvsEvyBdsnpqU.dZ9OBeYqhDT6",
       role: "ADMIN",
+      accessToken: await JwtAdapter.generateToken({ email: "admin@admin.com" })
     },
   });
   console.log({ admin });
