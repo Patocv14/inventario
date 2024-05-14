@@ -17,23 +17,8 @@ export class Server {
   }
 
   async start() {
-    const whitelist = [process.env.FRONTEND_URL, "http://localhost:4000"];
-    const whitelistRegex = /http:\/\/localhost:\d+/;
 
-
-    const corsOptions = {
-      origin: function (origin: any, callback: any) {
-        if (whitelist.includes(origin) || whitelistRegex.test(origin)) {
-          // Puede consultar la api
-          callback(null, true);
-        } else {
-          // No esta permitido el request
-          callback(new Error("Error de cors"));
-        }
-      },
-    };
-
-    this.app.use(cors(corsOptions));
+    this.app.use(cors());
 
     this.app.use(express.json());
 
