@@ -17,11 +17,13 @@ export class Server {
   }
 
   async start() {
-    const whitelist = [process.env.FRONTEND_URL];
+    const whitelist = [process.env.FRONTEND_URL, "http://localhost:4000"];
+    const whitelistRegex = /http:\/\/localhost:\d+/;
+
 
     const corsOptions = {
       origin: function (origin: any, callback: any) {
-        if (whitelist.includes(origin)) {
+        if (whitelist.includes(origin) || whitelistRegex.test(origin)) {
           // Puede consultar la api
           callback(null, true);
         } else {
