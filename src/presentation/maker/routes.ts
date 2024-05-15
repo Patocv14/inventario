@@ -14,9 +14,9 @@ export class MakerRoutes {
     const repository = new MakerRepositoryImpl(datasource);
     const controller = new MakerController(repository);
 
-    router.post("/", isAdmin ,controller.createMaker);
-    router.put("/:id", isAdmin ,controller.updateMaker);
-    router.delete("/:id", isAdmin ,controller.deleteMaker);
+    router.post("/" ,controller.createMaker);
+    router.put("/:id" ,controller.updateMaker);
+    router.delete("/:id" ,controller.deleteMaker);
     router.get("/:id", controller.getMaker);
     router.get("/", controller.getMakers);
 

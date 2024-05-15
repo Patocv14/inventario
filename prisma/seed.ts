@@ -12,7 +12,17 @@ async function main() {
       accessToken: await JwtAdapter.generateToken({ email: "admin@admin.com" })
     },
   });
-  console.log({ admin });
+  const category = await prisma.category.create({
+    data: {
+      name: 'Category 1'
+    }
+  })
+  const maker = await prisma.maker.create({
+    data: {
+      name: 'Maker 1'
+    }
+  })
+  console.log({ admin, category, maker });
 }
 
 main()

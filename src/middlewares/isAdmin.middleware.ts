@@ -25,6 +25,7 @@ const isAdmin = async (req: Request, res: Response, next: NextFunction) => {
       })
       if(!user) throw CustomErrors.notFound("User not found")
       if(user.role !== "ADMIN") {
+        console.log(user)
         return res.status(401).json({
           message: "Unauthorized"
         })
@@ -39,6 +40,7 @@ const isAdmin = async (req: Request, res: Response, next: NextFunction) => {
   }
 
   if(!token) {
+    console.log("No token",token)
     return res.status(401).json({
       message: "Unauthorized"
     })

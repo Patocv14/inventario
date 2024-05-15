@@ -14,9 +14,9 @@ export class CategoryRoutes {
     const repository = new CategoryRepositoryImpl(datasource);
     const controller = new CategoryController(repository);
 
-    router.post("/", isAdmin ,controller.createCategory);
-    router.put("/:id", isAdmin ,controller.updateCategory);
-    router.delete("/:id", isAdmin ,controller.deleteCategory);
+    router.post("/" ,controller.createCategory);
+    router.put("/:id" ,controller.updateCategory);
+    router.delete("/:id" ,controller.deleteCategory);
     router.get("/:id", controller.getCategory);
     router.get("/", controller.getCategories);
 

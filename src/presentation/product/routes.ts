@@ -14,12 +14,12 @@ export class ProductRoutes {
     const repository = new ProductRepositoryImpl(datasource);
     const controller = new ProductController(repository);
 
-    router.post('/', isAdmin ,controller.createProduct)
+    router.post('/' ,controller.createProduct)
     router.get('/' ,controller.getProducts)
     router.get('/:productId', controller.getProduct)
     router.get('/category/:categoryId', controller.getProductByCategory)
-    router.put('/:productId', isAdmin ,controller.updateProduct)
-    router.delete('/:productId', isAdmin ,controller.deleteProduct)
+    router.put('/:productId' ,controller.updateProduct)
+    router.delete('/:productId' ,controller.deleteProduct)
 
     return router;
   }

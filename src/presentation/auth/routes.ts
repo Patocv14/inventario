@@ -12,13 +12,13 @@ export class AuthRoutes {
     const controller = new AuthController(authRepository);
 
 
-    router.post("/register", isAdmin ,controller.registerUser);
+    router.post("/register" ,controller.registerUser);
     router.post('/login', controller.loginUser)
     router.get('/verify-token/:token', controller.verifyAccessToken)
     router.get('/:userId', controller.getUser)
     router.get('/', controller.getUsers)
-    router.put('/:userId', isAdmin ,controller.updateUser)
-    router.delete('/:userId', isAdmin ,controller.deleteUser)
+    router.put('/:userId' ,controller.updateUser)
+    router.delete('/:userId' ,controller.deleteUser)
     return router;
   }
 }
