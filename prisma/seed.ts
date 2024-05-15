@@ -14,11 +14,13 @@ async function main() {
   });
   const category = await prisma.category.create({
     data: {
+      id: '1',
       name: 'Category 1'
     }
   })
   const maker = await prisma.maker.create({
     data: {
+      id: '1',
       name: 'Maker 1'
     }
   })
